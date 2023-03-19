@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".presentation.ChooseLevelFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выберите уровень:"
+        android:textStyle="bold"
+        android:textSize="24sp"/>
+    <Button
+        android:id="@+id/light_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textColor="@color/white"
+        android:text="Тестовый"
+        />
+    <Button
+        android:id="@+id/test_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Легкий"
+        android:textColor="@color/white"
+        android:backgroundTint="#3A8C3D"
+        />
+    <Button
+        android:id="@+id/mormal_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Средний"
+        android:backgroundTint="#FFC107"
+        android:textColor="@color/white"
+
+        />
+    <Button
+        android:id="@+id/hard_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Тяжелый"
+        android:backgroundTint="#FF5722"
+        android:textColor="@color/white"
+
+        />
+
+</LinearLayout>
