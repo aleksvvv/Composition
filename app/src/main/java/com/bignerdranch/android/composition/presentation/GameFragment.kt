@@ -45,7 +45,9 @@ class GameFragment:Fragment() {
         _binding = null
     }
     private fun parsArgs(){
-        level = requireArguments().getSerializable(LEVEL_GAME) as Level
+        requireArguments().getParcelable<Level>(LEVEL_GAME)?.let {
+            level = it
+        }
     }
     private fun launchGameFinishedFragment(gameResult: GameResult){
         requireActivity().supportFragmentManager
@@ -60,7 +62,7 @@ class GameFragment:Fragment() {
 
             return GameFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(LEVEL_GAME, level)
+                    putParcelable(LEVEL_GAME, level)
                 }
             }
         }

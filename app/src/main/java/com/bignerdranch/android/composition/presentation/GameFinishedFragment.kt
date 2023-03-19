@@ -30,6 +30,7 @@ class GameFinishedFragment() :Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         requireActivity().onBackPressedDispatcher.
         addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
@@ -50,14 +51,16 @@ private fun retryGame(){
     requireActivity().supportFragmentManager.popBackStack(ChooseLevelFragment.NAME,0)
 }
     private fun putArgs(){
-        gameResult = requireArguments().getSerializable(KEY_RESULT_GAME) as GameResult
+         requireArguments().getParcelable<GameResult>(KEY_RESULT_GAME)?.let {
+            gameResult = it
+        }
     }
     companion object{
         private const val KEY_RESULT_GAME = "key_result"
         fun newInstance(gameResult: GameResult):GameFinishedFragment{
             return GameFinishedFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(KEY_RESULT_GAME,gameResult)
+                    putParcelable(KEY_RESULT_GAME,gameResult)
                 }
             }
 
