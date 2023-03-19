@@ -7,23 +7,39 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bignerdranch.android.composition.R
 import com.bignerdranch.android.composition.databinding.FragmentWelcomeBinding
+import kotlin.concurrent.fixedRateTimer
 
-class WelcomeFragment:Fragment() {
+class WelcomeFragment : Fragment() {
     private var _binding: FragmentWelcomeBinding? = null
-    private val binding:FragmentWelcomeBinding
-    get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding == null")
+    private val binding: FragmentWelcomeBinding
+        get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding == null")
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentWelcomeBinding.inflate(inflater,container,false)
+        _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.buttonNext.setOnClickListener {
+            launchChooseFragment()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun launchChooseFragment() {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_container, ChooseLevelFragment.newInstance())
+            .addToBackStack(ChooseLevelFragment.NAME)
+            .commit()
     }
 }

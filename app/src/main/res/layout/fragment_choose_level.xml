@@ -14,7 +14,7 @@
         android:textStyle="bold"
         android:textSize="24sp"/>
     <Button
-        android:id="@+id/light_level"
+        android:id="@+id/test_level"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -22,15 +22,15 @@
         android:text="Тестовый"
         />
     <Button
-        android:id="@+id/test_level"
-        android:layout_width="match_parent"
+        android:id="@+id/light_level"
+                android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Легкий"
         android:textColor="@color/white"
         android:backgroundTint="#3A8C3D"
         />
     <Button
-        android:id="@+id/mormal_level"
+        android:id="@+id/normal_level"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Средний"
