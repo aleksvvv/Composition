@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bignerdranch.android.composition.R
 import com.bignerdranch.android.composition.databinding.FragmentGameBinding
 import com.bignerdranch.android.composition.domain.entity.GameResult
@@ -142,15 +143,16 @@ class GameFragment : Fragment() {
     }
 
     private fun launchGameFinishedFragment(gameResult: GameResult) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.main_container, GameFinishedFragment.newInstance(gameResult))
-            .addToBackStack(null)
-            .commit()
+        val args = Bundle().apply {
+            putParcelable(GameFinishedFragment.KEY_RESULT_GAME,gameResult)
+        }
+
+        findNavController().navigate(R.id.action_gameFragment_to_gameFinishedFragment, args)
+
     }
 
     companion object {
-        private const val LEVEL_GAME = "level"
+        const val LEVEL_GAME = "level"
         fun newInstance(level: Level): GameFragment {
 
             return GameFragment().apply {
