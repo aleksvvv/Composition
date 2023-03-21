@@ -40,6 +40,7 @@ class GameFinishedFragment() :Fragment() {
         binding.buttonRetry.setOnClickListener {
             retryGame()
         }
+        binding.tvRequiredAnswers.text = gameResult.gameSettings.minCountOfRightAnswers.toString()
     }
 
 
