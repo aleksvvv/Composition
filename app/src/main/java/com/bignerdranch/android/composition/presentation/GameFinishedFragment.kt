@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import com.bignerdranch.android.composition.R
 import com.bignerdranch.android.composition.databinding.FragmentGameFinishedBinding
 import com.bignerdranch.android.composition.domain.entity.GameResult
 
@@ -41,6 +42,7 @@ class GameFinishedFragment() :Fragment() {
             retryGame()
         }
         binding.tvRequiredAnswers.text = gameResult.gameSettings.minCountOfRightAnswers.toString()
+    bindViews()
     }
 
 
@@ -54,6 +56,43 @@ private fun retryGame(){
     private fun putArgs(){
          requireArguments().getParcelable<GameResult>(KEY_RESULT_GAME)?.let {
             gameResult = it
+        }
+    }
+    private fun bindViews() {
+        with(binding) {
+            emojiResult.setImageResource(getSmileResId())
+            tvRequiredAnswers.text = String.format(
+                getString(R.string.required_score),
+                gameResult.gameSettings.minCountOfRightAnswers
+            )
+            tvScoreAnswers.text = String.format(
+                getString(R.string.score_answers),
+                gameResult.countOfRightAnswers
+            )
+            tvRequiredPercentage.text = String.format(
+                getString(R.string.required_percentage),
+                gameResult.gameSettings.minPercentOfRightAnswers
+            )
+            tvScorePercentage.text = String.format(
+                getString(R.string.score_percentage),
+                getPercentOfRightAnswers()
+            )
+        }
+    }
+
+    private fun getSmileResId(): Int {
+        return if (gameResult.winner) {
+            R.drawable.ic_smile
+        } else {
+            R.drawable.ic_sad
+        }
+    }
+
+    private fun getPercentOfRightAnswers() = with(gameResult) {
+        if (countOfQuestions == 0) {
+            0
+        } else {
+            ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt()
         }
     }
     companion object{
